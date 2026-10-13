@@ -93,6 +93,13 @@ def upsert_documents(docs: list[dict]) -> int:
     """Upsert normalized weather documents (dedup on id). Returns rows written."""
     if not docs:
         return 0
+    # Dedupe within the batch: the same NWS alert can appear in several
+    # locations' feeds, and one INSERT..ON CONFLICT DO UPDATE statement cannot
+    # affect the same row twice (CardinalityViolation). Keep the last copy.
+    seen: dict[str, dict] = {}
+    for d in docs:
+        seen[d["id"]] = d
+    docs = list(seen.values())
     rows = [
         (
             d["id"], d["location"], d["source_type"], d.get("headline"),
