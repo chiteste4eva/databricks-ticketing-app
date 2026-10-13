@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}All tickets{% endblock %}
+{% block content %}
+{% if error %}<div class="error">{{ error }}</div>{% endif %}
+{% if tickets %}
+<table>
+  <thead>
+    <tr><th>Subject</th><th>Status</th><th>Submitted By</th><th>Created At</th></tr>
+  </thead>
+  <tbody>
+    {% for t in tickets %}
+    <tr>
+      <td><a href="{{ url_for('ticket_detail', ticket_id=t.id) }}">{{ t.subject }}</a></td>
+      <td><span class="status {{ t.status }}">{{ t.status }}</span></td>
+      <td>{{ t.email }}</td>
+      <td>{{ t.created_at.strftime('%Y-%m-%d %H:%M') if t.created_at else '' }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% else %}
+<p>No tickets yet. <a href="{{ url_for('ticket_submission_form') }}">Submit the first one</a>.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Support Tickets{% endblock %}</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #1f2937; background: #fafafa; }
+    header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    header a { text-decoration: none; }
+    .btn { display: inline-block; background: #1f6feb; color: #fff; border: none; padding: 0.5rem 1rem; border-radius: 6px; cursor: pointer; font-size: 0.95rem; }
+    .btn.secondary { background: #6b7280; }
+    .btn.danger { background: #16a34a; }
+    table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    th, td { text-align: left; padding: 0.7rem 0.9rem; border-bottom: 1px solid #eee; }
+    th { background: #f3f4f6; font-size: 0.85rem; text-transform: uppercase; letter-spacing: .03em; }
+    tr:last-child td { border-bottom: none; }
+    .status { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 600; }
+    .status.open { background: #fef3c7; color: #92400e; }
+    .status.resolved { background: #dcfce7; color: #166534; }
+    form.card { background: #fff; padding: 1.25rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    label { display: block; margin: 0.8rem 0 0.3rem; font-weight: 600; font-size: 0.9rem; }
+    input[type=text], input[type=email], textarea { width: 100%; padding: 0.6rem; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; box-sizing: border-box; }
+    textarea { min-height: 120px; resize: vertical; }
+    .msg { background: #fff; border-radius: 8px; padding: 0.9rem 1.1rem; margin: 0.6rem 0; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .msg .meta { font-size: 0.8rem; color: #6b7280; margin-bottom: 0.35rem; }
+    .msg.agent { border-left: 4px solid #1f6feb; }
+    .msg.user { border-left: 4px solid #9ca3af; }
+    .error { background: #fee2e2; color: #991b1b; padding: 0.7rem 1rem; border-radius: 6px; margin-bottom: 1rem; }
+    .detail-grid { background: #fff; padding: 1.25rem; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,.08); margin-bottom: 1rem; }
+    .actions { display: flex; gap: 0.6rem; margin-top: 1rem; align-items: center; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="{{ url_for('tickets_list') }}" style="color:inherit">🎫 Support Tickets</a></h1>
+    <a class="btn" href="{{ url_for('ticket_submission_form') }}">+ New ticket</a>
+  </header>
+  {% block content %}{% endblock %}
+</body>
+</html>
